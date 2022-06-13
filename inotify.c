@@ -219,6 +219,11 @@ static int walk_tree(unsigned int path_len, watch_node* parent, bool recursive, 
     }
   }
 
+  if (strstr(path_buf, "bazel-") != NULL) {
+    userlog(LOG_INFO, "bazel ignored: %s", path_buf);
+    return ERR_IGNORE;
+  }
+
   DIR* dir = NULL;
   if (recursive) {
     if ((dir = opendir(path_buf)) == NULL) {
@@ -233,10 +238,6 @@ static int walk_tree(unsigned int path_len, watch_node* parent, bool recursive, 
     }
   }
 
-  if (strstr(path_buf, ".staging") != NULL) {
-    userlog(LOG_ERR, "staging ignored: %s", path_buf);
-    return ERR_IGNORE;
-  }
   int id = add_watch(path_len, parent);
 
   if (dir == NULL) {
