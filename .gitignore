@@ -1,0 +1,6 @@
+# Build binaries
+fsnotifier
+fsnotifier64
+
+# IDE
+.idea/
