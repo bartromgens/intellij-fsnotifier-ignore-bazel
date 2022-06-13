@@ -1,11 +1,12 @@
-# IntelliJ fsNotifier ignore bazel
+# IntelliJ fsnotifier ignore bazel
 
-Even if directories are excluded in IntelliJ IDEs, they are not ignored in fsnotifier. 
+IntelliJ's fsnotifier does not ignore directories excluded in IntelliJ IDEs.
 Issue for this problem: https://youtrack.jetbrains.com/issue/IDEA-73309/When-a-folder-is-excluded-from-the-project-is-still-watched-with-inotify
 
-On the codebase I work with, this was a problem with huge bazel directories that a symlinked in the project (this is how bazel works).
+This can be a problem with huge directories inside the project.
+One example are large bazel symlinked directories in the project (this is how bazel works).
 
-My hacky fix is to ignore paths that contains `bazel-`.
+The hacky fix implmented in this version of fsnotifier is to ignore paths that contains `bazel-`.
 
 ## Build
 Install peer dependencies:
